@@ -4,6 +4,6 @@
 //mysql_select_db("cashflower");
 
 //franciscomatelli.com
-$conexao = mysql_connect("127.0.0.1", "fmatelll_floral", "zica098@@#");
-mysql_select_db("fmatelll_cashflower");
+$conexao = mysqli_connect("127.0.0.1", "user", "pass");
+mysqli_select_db("cashflower");
 ?>
