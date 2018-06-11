@@ -1,4 +1,4 @@
-# CashFlower - Online Cash Flow system (2008)
+# CashFlower - Online Cash Flow System (2008)
 by Francisco Mat
 
 It was an attempt to create an inovative online Cash Flow system, with dynamic graphics. Stopped due costs, confidentiality and Flash technology limitations.
@@ -12,6 +12,8 @@ Another great problem was in SQL, I just find out that the contability and doubl
 
 But today, looking back in time, the CashFlower was really complex and original software, with unique design, Flash + PHP communication (not trivial) and custom SQL structure, made by myself.
 
-Thanks to prof. dr. Valdemir Aparecido Pires for constantes feedbacks and reviews
+Thanks to prof. dr. Valdemir Aparecido Pires, from UNESP Araraquara, for constantes feedbacks and reviews
+
+Thanks to prof. dr. Alvaro Martim Guedes, from UNESP Araraquara, for Santander Prize Submission in 2008
 
 Francisco Matelli Matulovic - 2008
