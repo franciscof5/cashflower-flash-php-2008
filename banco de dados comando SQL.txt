@@ -1,0 +1,190 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.7
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jul 31, 2008 at 07:58 PM
+-- Server version: 5.0.51
+-- PHP Version: 5.2.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `cashflower`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banco`
+--
+
+CREATE TABLE IF NOT EXISTS `banco` (
+  `bancoID` int(20) NOT NULL auto_increment,
+  `bancoNome` varchar(50) NOT NULL,
+  `formatoConta` varchar(50) NOT NULL,
+  `logo` varchar(255) NOT NULL,
+  PRIMARY KEY  (`bancoID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `banco`
+--
+
+INSERT INTO `banco` (`bancoID`, `bancoNome`, `formatoConta`, `logo`) VALUES
+(1, 'Banco do Brasil', '', 'logobb.jpg'),
+(2, 'Nossa Caixa', '', 'logonossacaixa.jpg'),
+(3, 'Bradesco', '', 'logobradesco.jpg'),
+(4, 'Caixa Federal', '', 'logocaixa.jpg'),
+(5, 'HSBC', '', 'logohsbc.jpg'),
+(6, 'Itaú', '', 'logoitau.jpg'),
+(7, 'Sudameris', '', 'logosudameris.jpg'),
+(8, 'Banestes', '', 'logobanestes.jpg'),
+(9, 'Unibanco', '', 'logounibanco.jpg'),
+(10, 'Banco Real', '', 'logoreal.jpg'),
+(11, 'Banespa', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contabancaria`
+--
+
+CREATE TABLE IF NOT EXISTS `contabancaria` (
+  `contaBancariaID` int(20) NOT NULL auto_increment,
+  `contaNome` varchar(20) NOT NULL,
+  `numeroConta` varchar(50) NOT NULL,
+  `bancoID` int(20) NOT NULL,
+  `bandeira` varchar(20) NOT NULL,
+  `saldoInicial` float(15,2) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `dataRegistroConta` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`contaBancariaID`),
+  KEY `numeroConta` (`numeroConta`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `contabancaria`
+--
+
+INSERT INTO `contabancaria` (`contaBancariaID`, `contaNome`, `numeroConta`, `bancoID`, `bandeira`, `saldoInicial`, `descricao`, `dataRegistroConta`) VALUES
+(10, 'Nossa Caixa Padrão', '01-000481-0', 2, 'Master', 0.90, 'Conta padrão de movimento, universitária.', '2008-07-30 20:36:22'),
+(13, 'Realmente', '54576565', 10, 'Visa', 800.00, '', '2008-07-31 18:49:05'),
+(7, 'Banco Real', '6464687654', 10, 'Não há função crédit', -250.00, 'Atchim aoja kjadp lkaja pqan apsjd 12 a da;ka d;ja d;ja;sj da;jd ;ajd;kaj d', '2008-07-30 18:04:07'),
+(12, 'BB', '64654654', 1, 'Master', 45.00, 'Cotinha de fadas', '2008-07-30 20:52:30'),
+(8, 'Banco Real', '6464687654', 10, 'Não há função crédit', -250.00, 'Atchim aoja kjadp lkaja pqan apsjd 12 a da;ka d;ja d;ja;sj da;jd ;ajd;kaj d', '2008-07-30 18:04:26'),
+(9, 'Conta BB', '547883', 1, 'Visa', 800.00, 'Universitária', '2008-07-30 18:10:22'),
+(14, 'BB', '234234', 1, 'Visa', 12.00, 'sdfg', '2008-07-31 18:58:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lancamento`
+--
+
+CREATE TABLE IF NOT EXISTS `lancamento` (
+  `lancamentoID` int(20) NOT NULL auto_increment,
+  `valor` float(20,2) NOT NULL,
+  `quantidade` int(20) NOT NULL,
+  `data` date NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `contaBancariaID` int(11) NOT NULL,
+  `categoriaID` int(11) NOT NULL,
+  `posicaoCategoriaXML` float(15,2) NOT NULL,
+  PRIMARY KEY  (`lancamentoID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `lancamento`
+--
+
+INSERT INTO `lancamento` (`lancamentoID`, `valor`, `quantidade`, `data`, `descricao`, `contaBancariaID`, `categoriaID`, `posicaoCategoriaXML`) VALUES
+(1, 13.00, 0, '2008-07-31', 'sdfsdfsdf', 6, 0, 0.00),
+(2, 6.00, 1, '2008-07-30', '', 10, 1, 0.00),
+(3, 5.00, 1, '2008-07-31', '', 10, 1, 0.00),
+(4, 1.00, 1, '2008-07-16', '', 10, 1, 0.00),
+(5, -3.00, 1, '2008-06-12', '', 10, 1, 0.00),
+(6, -3.00, 1, '2008-07-31', '', 10, 1, 0.00),
+(7, -10.00, 1, '2008-07-31', '', 10, 1, 0.00),
+(8, 6.00, 1, '2008-06-12', '', 10, 1, 0.00),
+(9, 6.00, 1, '2008-05-06', '', 10, 1, 0.00),
+(10, 2.00, 1, '2008-05-05', '', 10, 1, 0.00),
+(11, 4.00, 1, '2008-08-01', '', 10, 1, 0.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `relcontlanc`
+--
+
+CREATE TABLE IF NOT EXISTS `relcontlanc` (
+  `relcontlanc` int(11) NOT NULL auto_increment,
+  `contaBancariaID` int(11) NOT NULL,
+  `lancamentoID` int(11) NOT NULL,
+  PRIMARY KEY  (`relcontlanc`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `relcontlanc`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `relusercont`
+--
+
+CREATE TABLE IF NOT EXISTS `relusercont` (
+  `relUserContID` int(20) NOT NULL auto_increment,
+  `userID` int(20) NOT NULL,
+  `contaBancariaID` int(20) NOT NULL,
+  PRIMARY KEY  (`relUserContID`),
+  UNIQUE KEY `userID` (`contaBancariaID`),
+  UNIQUE KEY `contaID` (`contaBancariaID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `relusercont`
+--
+
+INSERT INTO `relusercont` (`relUserContID`, `userID`, `contaBancariaID`) VALUES
+(12, 2, 13),
+(9, 1, 10),
+(7, 1, 7),
+(8, 2, 9),
+(11, 3, 12),
+(13, 1, 14);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `userID` int(11) NOT NULL auto_increment,
+  `email` varchar(255) NOT NULL,
+  `senha` varchar(20) NOT NULL,
+  `nome` varchar(80) NOT NULL,
+  `nascimento` varchar(20) NOT NULL,
+  `sexo` varchar(20) NOT NULL,
+  `pais` varchar(50) NOT NULL,
+  `estado` varchar(50) NOT NULL,
+  `cidade` varchar(80) NOT NULL,
+  `escolaridade` varchar(255) NOT NULL,
+  `utilizacao` varchar(255) NOT NULL,
+  `comentario` varchar(255) NOT NULL,
+  `dataCadastro` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `emailValidado_` int(11) NOT NULL,
+  PRIMARY KEY  (`userID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `usuario`
+--
+
+INSERT INTO `usuario` (`userID`, `email`, `senha`, `nome`, `nascimento`, `sexo`, `pais`, `estado`, `cidade`, `escolaridade`, `utilizacao`, `comentario`, `dataCadastro`, `emailValidado_`) VALUES
+(1, 'x', 'x', 'Francisco Matelli', '1988/05/06', 'Masculino', 'Brasil', 'SP', 'Itapetininga', 'Graduação', 'Administrar finanças pessoais', 'Agora vai', '2008-07-29 18:08:35', 0),
+(2, 'josiehesed@hotmail.com', '1409', 'Josie Hesed', '1988/09/14', 'Feminino', 'Brasil', 'SP', 'Araraquara', 'Graduação', 'Administrar finanças pessoais', '', '2008-07-30 18:07:38', 0),
+(3, 'k', 'k', 'k', '1900/01/01', 'Masculino', 'Brasil', 'AP', 'k', 'Nada, mas com Pós e MBA', 'Controlar os gastos de dependentes', '', '2008-07-30 20:52:13', 0);

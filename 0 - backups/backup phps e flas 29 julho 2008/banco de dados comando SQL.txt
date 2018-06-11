@@ -1,0 +1,196 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.7
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jul 28, 2008 at 09:18 PM
+-- Server version: 5.0.51
+-- PHP Version: 5.2.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `cashflower`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banco`
+--
+
+CREATE TABLE IF NOT EXISTS `banco` (
+  `bancoID` int(20) NOT NULL auto_increment,
+  `nomeFantasia` varchar(50) NOT NULL,
+  `formatoConta` varchar(50) NOT NULL,
+  `logo20x20` varchar(255) NOT NULL,
+  PRIMARY KEY  (`bancoID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `banco`
+--
+
+INSERT INTO `banco` (`bancoID`, `nomeFantasia`, `formatoConta`, `logo20x20`) VALUES
+(1, 'Banco do Brasil', '0-00000-3242', '/imagens/logos/bancos/bb.jpb'),
+(2, 'Banespa', '0-0000-00', '/imagens/logos/bancos/banespa.jpb'),
+(4, 'ABN', '', ''),
+(6, 'Banco do Povo', '', ''),
+(13, 'Banco Real', '', ''),
+(12, 'Nossa Caixa', '', ''),
+(11, 'Paulista', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contabancaria`
+--
+
+CREATE TABLE IF NOT EXISTS `contabancaria` (
+  `contaBancariaID` int(20) NOT NULL auto_increment,
+  `contaNome` varchar(20) NOT NULL,
+  `numeroConta` varchar(50) NOT NULL,
+  `bancoID` int(20) NOT NULL,
+  `bandeira` varchar(20) NOT NULL,
+  `saldoInicial` float(15,2) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `dataRegistroConta` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`contaBancariaID`),
+  KEY `numeroConta` (`numeroConta`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+
+--
+-- Dumping data for table `contabancaria`
+--
+
+INSERT INTO `contabancaria` (`contaBancariaID`, `contaNome`, `numeroConta`, `bancoID`, `bandeira`, `saldoInicial`, `descricao`, `dataRegistroConta`) VALUES
+(1, '', '0-00000-547888', 0, 'Visa', 200.00, '', '2008-07-27 21:22:04'),
+(2, '', '0-00000-5472', 0, 'Visa', 200.00, '', '2008-07-27 21:22:44'),
+(3, '', '0-00000-547s', 0, 'Visa', 200.00, '', '2008-07-27 21:23:20'),
+(4, '', '00-0545787', 0, 'Outra bandeira', 541.25, '', '2008-07-27 21:25:08'),
+(5, '', '0-00000-124', 2, 'Master', 200.50, '', '2008-07-27 22:48:00'),
+(6, '', '0-00000-124', 1, 'Master', 200.50, '', '2008-07-27 22:48:30'),
+(7, '', '0-00000-124s', 1, 'Master', 200.50, '', '2008-07-27 22:48:41'),
+(8, '', 'Asdas', 2, 'Visa', 123.00, '', '2008-07-27 22:51:21'),
+(9, '', '1111111111111', 1, 'Não há função crédit', 2222.00, '', '2008-07-27 22:51:31'),
+(10, '', '0-00000-54777', 1, 'Não há função crédit', 787.00, '', '2008-07-27 22:53:38'),
+(11, '', '00-00-000125', 1, 'Master', 200.00, '', '2008-07-27 22:54:35'),
+(12, '', '0-00000-54728', 1, 'American Express', 1800.00, '', '2008-07-27 22:54:51'),
+(13, '', 'aasd', 1, 'Master', 1800.00, '', '2008-07-27 22:56:06'),
+(14, '', '1231231', 1, 'Visa', 123123.00, '', '2008-07-27 22:56:14'),
+(15, '', '23123', 0, 'Master', 454.00, '', '2008-07-27 23:28:54'),
+(16, '', '4548787', 1, 'Não há função crédit', 654.00, '', '2008-07-27 23:29:41'),
+(17, '', '3', 2, 'Master', 4.00, '', '2008-07-27 23:52:30'),
+(18, '', '787', 0, 'American Express', 487.00, '', '2008-07-27 23:53:38'),
+(19, '', '00-00-000122', 1, 'American Express', 200.00, '', '2008-07-27 23:59:58'),
+(20, '', '12312312', 1, 'Visa', 5.00, '', '2008-07-28 00:52:47'),
+(21, '', '0912309123', 2, 'Não há função crédit', 19238.00, '', '2008-07-28 00:54:35'),
+(22, '', 'Oasd', 10, 'American Express', 129.00, '', '2008-07-28 00:54:48'),
+(23, '', '000000000', 10, 'Visa', 0.00, '', '2008-07-28 00:55:26'),
+(24, '', '4577787-01', 0, 'Master', 478.00, '', '2008-07-28 00:56:56'),
+(25, '', '0-00000-547s', 1, 'Outra bandeira', 200.00, 'Cotinha de fadas', '2008-07-28 01:06:33'),
+(26, '', '01-000481-0', 6, 'Master', 0.90, 'Conta padrão de movimento, universitária.', '2008-07-28 01:26:03'),
+(27, 'Banespa 01', '01-5487', 1, 'Visa', 45.00, 'Cotinha de fadas', '2008-07-28 19:06:32'),
+(28, 'Conta de receitas 2', '05-05478-02', 0, 'American Express', 257.21, 'Af', '2008-07-28 21:13:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lancamento`
+--
+
+CREATE TABLE IF NOT EXISTS `lancamento` (
+  `lancamentoID` int(20) NOT NULL auto_increment,
+  `valor` float(20,2) NOT NULL,
+  `quantidade` int(20) NOT NULL,
+  `data` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `descricao` varchar(255) NOT NULL,
+  `contaID` int(11) NOT NULL,
+  `categoriaID` int(11) NOT NULL,
+  `posicaoCategoriaXML` float(15,2) NOT NULL,
+  PRIMARY KEY  (`lancamentoID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `lancamento`
+--
+
+INSERT INTO `lancamento` (`lancamentoID`, `valor`, `quantidade`, `data`, `descricao`, `contaID`, `categoriaID`, `posicaoCategoriaXML`) VALUES
+(1, 5.00, 1, '2008-07-17 08:00:00', '', 1, 1, 0.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `relusercont`
+--
+
+CREATE TABLE IF NOT EXISTS `relusercont` (
+  `relUserContID` int(20) NOT NULL auto_increment,
+  `userID` int(20) NOT NULL,
+  `contaID` int(20) NOT NULL,
+  PRIMARY KEY  (`relUserContID`),
+  UNIQUE KEY `userID` (`contaID`),
+  UNIQUE KEY `contaID` (`contaID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `relusercont`
+--
+
+INSERT INTO `relusercont` (`relUserContID`, `userID`, `contaID`) VALUES
+(1, 0, 1),
+(2, 0, 5),
+(3, 0, 4),
+(5, 0, 12),
+(6, 5, 13),
+(7, 5, 14),
+(8, 4, 15),
+(9, 4, 16),
+(10, 4, 17),
+(11, 4, 18),
+(12, 4, 19),
+(13, 1, 20),
+(14, 1, 21),
+(15, 1, 22),
+(16, 1, 23),
+(17, 1, 24),
+(18, 1, 3),
+(19, 1, 26),
+(20, 1, 27),
+(21, 1, 28);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `userID` int(11) NOT NULL auto_increment,
+  `email` varchar(255) NOT NULL,
+  `senha` varchar(20) NOT NULL,
+  `nome` varchar(80) NOT NULL,
+  `nascimento` varchar(20) NOT NULL,
+  `sexo` varchar(20) NOT NULL,
+  `pais` varchar(50) NOT NULL,
+  `estado` varchar(50) NOT NULL,
+  `cidade` varchar(80) NOT NULL,
+  `escolaridade` varchar(255) NOT NULL,
+  `utilizacao` varchar(255) NOT NULL,
+  `comentario` varchar(255) NOT NULL,
+  `dataCadastro` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `emailValidado_` int(11) NOT NULL,
+  PRIMARY KEY  (`userID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `usuario`
+--
+
+INSERT INTO `usuario` (`userID`, `email`, `senha`, `nome`, `nascimento`, `sexo`, `pais`, `estado`, `cidade`, `escolaridade`, `utilizacao`, `comentario`, `dataCadastro`, `emailValidado_`) VALUES
+(1, 'x', 'x', 'Francisco Matelli', '1900/01/01', 'Masculino', 'Brasil', 'AC', 'x', 'Ensino Médio', 'Administrar finanças pessoais', 'xxx', '2008-07-27 19:34:10', 0),
+(2, 'k', 'k', 'Católico Pereira Bastos', '1900/01/01', 'Masculino', 'Brasil', 'AL', 'Y', 'Pós-Graduação', 'Fluxo de caixa da minha empresa', 'Háháá ufiuw', '2008-07-27 20:20:01', 0),
+(3, 'l', 'l', 'l', '1903/03/01', 'Masculino', 'Brasil', 'AC', 'x', 'Ensino Médio', 'Fluxo de caixa da minha empresa', 'l', '2008-07-27 21:11:52', 0),
+(4, 'p', 'p', 'p', '1917/05/02', 'Masculino', 'Brasil', 'AC', 'p', 'Pós-Graduação', 'Administrar finanças pessoais', 'p\r\n', '2008-07-27 21:24:27', 0),
+(5, 'o', 'o', 'Otavio', '1915/07/13', 'Masculino', 'Brasil', 'PE', 'Onoório', 'Nada, mas com Pós e MBA', 'Fluxo de caixa da minha empresa', 'Adasd', '2008-07-27 22:42:47', 0),
+(6, 'fmatelli@gmail.com', '931777', 'Francisco Matelli', '1988/05/06', 'Masculino', 'Brasil', 'SP', 'Itapetininga', 'Graduação', 'Administrar finanças pessoais', 'Agora está atiradinho o programa!\r\n\r\nExpressionante eu diria!', '2008-07-28 21:15:40', 0);
