@@ -1,4 +1,4 @@
-#CashFlower - Online Cash Flow system (2008)
+# CashFlower - Online Cash Flow system (2008)
 by Francisco Mat
 
 It was an attempt to create an inovative online Cash Flow system, with dynamic graphics. Stopped due costs, confidentiality and Flash technology limitations.
