@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+<?php header("Content-Type: text/html; charset=ISO-8859-1",true);?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -63,14 +64,23 @@ function adicionarCampo() {
 <?php
 include_once("include/conectar.php");
 
-
-$bancoNome = $_POST["bancoNome"];
-$contaNome = $_POST["contaNome"];
-$bancoID = $_POST["bancoID"];
-$numeroConta = $_POST["numeroConta"];
-$descricaoConta = $_POST["descricaoConta"];
-$saldoInicial = $_POST["saldoInicial"];
-$bandeira = $_POST["bandeira"];
+if(isset($_POST["bancoNome"])) {
+	$bancoNome = $_POST["bancoNome"];
+	$contaNome = $_POST["contaNome"];
+	$bancoID = $_POST["bancoID"];
+	$numeroConta = $_POST["numeroConta"];
+	$descricaoConta = $_POST["descricaoConta"];
+	$saldoInicial = $_POST["saldoInicial"];
+	$bandeira = $_POST["bandeira"];
+} else {
+	$bancoNome=NULL;
+	$contaNome=NULL;
+	$bancoID=NULL;
+	$numeroConta=NULL;
+	$descricaoConta=NULL;
+	$saldoInicial=NULL;
+	$bandeira=NULL;
+}
 
 $cadastramentoCorreto_ = true;
 
@@ -104,14 +114,14 @@ if($_SESSION["primeiroLogin"]==1 and $numeroConta==NULL and $saldoInicial==NULL 
 /*REGISTEO PREVIO DE BANCOS NOVOS*/
 if($bancoNome!=NULL) {
 	$queryBancoExistenteSQL = 'SELECT `bancoNome` FROM `banco` WHERE  `bancoNome` = "'.$bancoNome.'";';
-	$queryBancoExistente = mysql_query($queryBancoExistenteSQL, $conexao) or die(mysql_error());
-	$queryBanco = mysql_fetch_assoc($queryBancoExistente);
+	$queryBancoExistente = mysqli_query($conexao,$queryBancoExistenteSQL) or die(mysql_error());
+	$queryBanco = mysqli_fetch_assoc($queryBancoExistente);
 	
 	if($queryBanco["nomeFantasia"]==$bancoNome) {
 		$msg = "Este banco já está registrado";
 	} else {
 		$queryInserirBancoSQL2 = 'INSERT INTO `banco` (`bancoNome`) VALUES ("'.$bancoNome.'");';
-		mysql_query($queryInserirBancoSQL2, $conexao) or die(mysql_error());
+		mysqli_query($conexao,$queryInserirBancoSQL2) or die(mysql_error());
 		$msg = "Banco registrado com sucesso";
 	}
 	
@@ -120,14 +130,14 @@ if($bancoNome!=NULL) {
 if($cadastramentoCorreto_==true) {
 	//
 	$queryRegistroString = 'INSERT INTO `contabancaria` (`contaBancariaID`, `contaNome`, `numeroConta`, `bancoID`, `bandeira`, `saldoInicial`, `descricao`) VALUES (\'\', "'.$contaNome.'", "'.$numeroConta.'", "'.$bancoID.'", "'.$bandeira.'", "'.$saldoInicial.'", "'.$descricaoConta.'");';	
-	$queryRegistro = mysql_query($queryRegistroString, $conexao) or die(mysql_error());
+	$queryRegistro = mysqli_query($conexao,$queryRegistroString) or die(mysql_error());
 	//
 	$queryContaString = 'SELECT `contaBancariaID` FROM `contabancaria` WHERE `numeroConta` = "'.$numeroConta.'";';
-	$queryConta = mysql_query($queryContaString, $conexao) or die(mysql_error());
-	$queryContaArray = mysql_fetch_assoc($queryConta);
+	$queryConta = mysqli_query($conexao,$queryContaString) or die(mysql_error());
+	$queryContaArray = mysqli_fetch_assoc($queryConta);
 	//
 	$queryRelacionalString = 'INSERT INTO `relusercont` (`relUserContID`, `userID`, `contaBancariaID`) VALUES (\'\', "'.$_SESSION["userID"].'", "'.$queryContaArray["contaBancariaID"].'");';
-	$queryConta = mysql_query($queryRelacionalString, $conexao) or die(mysql_error());
+	$queryConta = mysqli_query($conexao,$queryRelacionalString) or die(mysql_error());
 	//
 	$msg = 'Cadastro realizado com sucesso!';
 	//$msg = $queryContaArray["contaBancariaID"];
@@ -136,7 +146,7 @@ if($cadastramentoCorreto_==true) {
 }
 //Apenas para pegar os bancos
 $queryBancosString = 'SELECT `bancoNome`,`bancoID` FROM `banco` ORDER BY `bancoNome`;';
-$queryBancos = mysql_query($queryBancosString, $conexao) or die(mysql_error());
+$queryBancos = mysqli_query($conexao,$queryBancosString) or die(mysql_error());
 ?>
 
 <table width="100%" height="100%" cellpadding="0" cellspacing="0">
@@ -185,7 +195,7 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
 											<option value="">Escolha o banco</option>
 											
 											<?php
-											while ($row = mysql_fetch_assoc($queryBancos)) {
+											while ($row = mysqli_fetch_assoc($queryBancos)) {
 												echo '<option value="'.$row["bancoID"].'">'.$row["bancoNome"].'</option>';
 											}
 											?>

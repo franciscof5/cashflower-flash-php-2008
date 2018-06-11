@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   sodipodi:docbase="D:\Sites\cashflower"
+   sodipodi:docname="bando de dados.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="357.71315"
+     inkscape:cy="807.47781"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1290"
+     inkscape:window-height="850"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#479cac;fill-opacity:1;stroke:#479cac;stroke-width:2.33820081;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2166"
+       width="110.46336"
+       height="135.21208"
+       x="44.520889"
+       y="138.24831"
+       rx="0.68914914" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="48.568542"
+       y="151.8721"
+       id="text2168"><tspan
+         sodipodi:role="line"
+         id="tspan2170"
+         x="48.568542"
+         y="151.8721">userID</tspan><tspan
+         sodipodi:role="line"
+         x="48.568542"
+         y="166.8721"
+         id="tspan2172">nome</tspan><tspan
+         sodipodi:role="line"
+         x="48.568542"
+         y="181.8721"
+         id="tspan2176">nascimento</tspan><tspan
+         sodipodi:role="line"
+         x="48.568542"
+         y="196.8721"
+         id="tspan2180">cpf</tspan><tspan
+         sodipodi:role="line"
+         x="48.568542"
+         y="211.8721"
+         id="tspan2224">email</tspan><tspan
+         sodipodi:role="line"
+         x="48.568542"
+         y="226.8721"
+         id="tspan2190" /><tspan
+         sodipodi:role="line"
+         x="48.568542"
+         y="241.8721"
+         id="tspan2196" /></text>
+    <rect
+       style="fill:#479cac;fill-opacity:1;stroke:#479cac;stroke-width:1.36174476;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2200"
+       width="104.87383"
+       height="48.305267"
+       x="311.52927"
+       y="135.34673"
+       rx="0.65427762" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="317.38403"
+       y="147.85724"
+       id="text2202"><tspan
+         sodipodi:role="line"
+         x="317.38403"
+         y="147.85724"
+         id="tspan2206">cnpjID</tspan><tspan
+         sodipodi:role="line"
+         x="317.38403"
+         y="162.85724"
+         id="tspan2230">razaoSocial</tspan><tspan
+         sodipodi:role="line"
+         x="317.38403"
+         y="177.85724"
+         id="tspan2208">nomeFantasia</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.37121174px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 154.21202,189.52 C 162.17358,183.56824 172.8027,174.65697 180.51689,168.4965"
+       id="path2210"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="fill:#479cac;fill-opacity:1;stroke:#479cac;stroke-width:3.20000005;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2212"
+       width="83.928574"
+       height="53.57143"
+       x="182.85715"
+       y="138.07646"
+       rx="0.65427762" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="185.28571"
+       y="150.36217"
+       id="text2214"><tspan
+         sodipodi:role="line"
+         id="tspan2216"
+         x="185.28571"
+         y="150.36217">relCnpjUserID</tspan><tspan
+         sodipodi:role="line"
+         x="185.28571"
+         y="165.36217"
+         id="tspan2218">userID</tspan><tspan
+         sodipodi:role="line"
+         x="185.28571"
+         y="180.36217"
+         id="tspan2220">cnpjID</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.49029207px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 267.48221,156.39925 C 280.92536,157.0681 299.56656,156.99824 312.87495,157.25369"
+       id="path2222"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="fill:#479cac;fill-opacity:1;stroke:#479cac;stroke-width:3.20000005;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2250"
+       width="83.928574"
+       height="53.57143"
+       x="183.75"
+       y="217.71933"
+       rx="0.65427762" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.40391538px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 155.83187,236.53463 C 164.11794,237.2711 175.60798,237.19417 183.81099,237.47545"
+       id="path2252"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="186.30553"
+       y="231.89621"
+       id="text2254"><tspan
+         sodipodi:role="line"
+         id="tspan2256"
+         x="186.30553"
+         y="231.89621">relContUserID</tspan><tspan
+         sodipodi:role="line"
+         x="186.30553"
+         y="246.89621"
+         id="tspan2258">userID</tspan><tspan
+         sodipodi:role="line"
+         x="186.30553"
+         y="261.89621"
+         id="tspan2260">contaID</tspan></text>
+    <rect
+       style="fill:#479cac;fill-opacity:1;stroke:#479cac;stroke-width:2.33820081;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2262"
+       width="110.46336"
+       height="135.21208"
+       x="312.9826"
+       y="218.32758"
+       rx="0.68914914" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.49029207px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 268.37506,233.72067 C 281.81821,234.38952 300.45941,234.31966 313.7678,234.57511"
+       id="path2264"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="319.54883"
+       y="234.16002"
+       id="text2266"><tspan
+         sodipodi:role="line"
+         x="319.54883"
+         y="234.16002"
+         id="tspan2272">contaID</tspan><tspan
+         sodipodi:role="line"
+         x="319.54883"
+         y="249.16002"
+         id="tspan2279">tipo</tspan><tspan
+         sodipodi:role="line"
+         x="319.54883"
+         y="264.16002"
+         id="tspan2281">instituicao</tspan><tspan
+         sodipodi:role="line"
+         x="319.54883"
+         y="279.16002"
+         id="tspan2283">numeroConta</tspan><tspan
+         sodipodi:role="line"
+         x="319.54883"
+         y="294.16002"
+         id="tspan2285">titular</tspan><tspan
+         sodipodi:role="line"
+         x="319.54883"
+         y="309.16002"
+         id="tspan2287">lancamentos</tspan><tspan
+         sodipodi:role="line"
+         x="319.54883"
+         y="324.16002"
+         id="tspan2289">bandeira</tspan></text>
+  </g>
+</svg>

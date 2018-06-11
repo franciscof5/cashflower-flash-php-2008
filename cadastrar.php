@@ -75,9 +75,9 @@ if($utilizacao=="") {
 if(cadastramentoCorreto_==true and $email!=NULL) {
 	$queryEmailString = 'SELECT `email` FROM `usuario` WHERE `email` = "'.$email.'";';
 	
-	$queryEmail = mysql_query($queryEmailString, $conexao) or die(mysql_error());
+	$queryEmail = mysqli_query($conexao, $queryEmailString) or die(mysql_error($conexao));
 	
-	$queryEmailArray = mysql_fetch_assoc($queryEmail);
+	$queryEmailArray = mysqli_fetch_assoc($queryEmail);
 	
 	if($queryEmailArray["email"]==$email) {
 		$msg = "Esta email já está sendo utilizado.";
@@ -90,7 +90,7 @@ if($cadastramentoCorreto_==true and $email!=NULL) {
 
 	$queryInsercaoString = 'INSERT INTO `usuario` (`userID`, `email`, `senha`, `nome`, `nascimento`, `sexo`, `pais`, `estado`, `cidade`, `escolaridade`, `utilizacao`, `comentario`, `dataCadastro`, `emailValidado_`) VALUES (NULL, "'.$email.'", "'.$senha.'", "'.$nome.'", "'.$nascimento.'", "'.$sexo.'", "'.$pais.'", "'.$estado.'", "'.$cidade.'", "'.$escolaridade.'", "'.$utilizacao.'", "'.$comentario.'", NOW(), \'0\');';
 	
-	$queryInsercao = mysql_query($queryInsercaoString, $conexao) or die(mysql_error());
+	$queryInsercao = mysqli_query($conexao, $queryInsercaoString) or die(mysql_error());
 	
 	$msg = 'Cadastro realizado com sucesso!';
 	

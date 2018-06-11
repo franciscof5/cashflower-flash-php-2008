@@ -3,6 +3,8 @@ by Francisco Mat
 
 It was an attempt to create an inovative online Cash Flow system, with dynamic graphics. Stopped due costs, confidentiality and Flash technology limitations.
 
+![CashFlower - Online Cash Flow system (2008)](2018-06-11-10-cashflower.png)
+
 ## Project history
 It was an really great attempt to create a brand new product, an online cash flow system. It was stopped because Flash technology was fastly becoming outdated, it need to be replaced urgently and the project ended in demo.
 

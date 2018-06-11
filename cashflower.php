@@ -98,19 +98,20 @@ include_once("include/conectar.php");
 //echo "post: ".$_POST['contaBancariaID']." session era: ".$_SESSION['contaBancariaID']." --v---->";
 //echo $_POST['lancando_'];
 
-if($_POST['contaBancariaID'])
+if(isset($_POST['contaBancariaID']))
 $contaSQL = 'SELECT * FROM `contabancaria` WHERE `contaBancariaID`="'.$_POST['contaBancariaID'].'";';
 else
 $contaSQL = 'SELECT * FROM `contabancaria` WHERE `contaBancariaID`="'.$_SESSION['contaBancariaID'].'";';
 
-$contaQuery = mysql_query($contaSQL, $conexao) or die(mysql_error());
-$contaArray = mysql_fetch_assoc($contaQuery);
-
+$contaQuery = mysqli_query($conexao, $contaSQL) or die(mysql_error($conexao));
+$contaArray = mysqli_fetch_assoc($contaQuery);
+#$contaArray = $contaQuery->fetch_assoc();
+#var_dump($_SESSION);die;
 //BUSCA O BANCO CORRESPONDENTE A CONTA BANCARIA
 $bancoSQL = 'SELECT * FROM `banco` WHERE bancoID="'.$contaArray["bancoID"].'"';
-$bancoQuery = mysql_query($bancoSQL, $conexao) or die(mysql_error());
-$bancoArray = mysql_fetch_assoc($bancoQuery);
-
+$bancoQuery = mysqli_query($conexao, $bancoSQL) or die(mysql_error($conexao));
+$bancoArray = mysqli_fetch_assoc($bancoQuery);
+#var_dump($bancoArray);die;
 //CASO O BANCO NAO TENHA LOGO
 if($bancoArray["logo"]=="")
 $bancoArray["logo"]="cashflower.jpg";
@@ -123,34 +124,53 @@ $_SESSION["bancoID"] = $bancoArray["bancoID"];
 $_SESSION["bancoLogo"] = $bancoArray["logo"];
 
 //INSERT O LANÇAMENTO, ANETS LOGICO DE BUSCAR OS VALORES LANCADOS30 de Julho de 2008
-$valor = $_POST["valor"];
-$quantidade = $_POST["quantidade"];
-$categoria = $_POST["categoria"];
-$data = $_POST["theDate3"].":00";
-$comentario = $_POST["comentario"];
+if(isset($_POST["valor"]) AND isset($_POST["theDate3"])) {
+	$valor = $_POST["valor"];
+	$quantidade = $_POST["quantidade"];
+	#$categoria = $_POST["categoria"];
+	$categoria=1;
+	$data = $_POST["theDate3"].":00";
+	$comentario = $_POST["comentario"];
+}
 
 //SOMENTE CASO A PAGINA TENHA SIDO CARREGADA A PARTIR DA FUNCAO LANCAR
-if($_POST['lancando_']) {
+if(isset($_POST['lancando_']) AND isset($_POST["valor"]) AND isset($_POST["theDate3"])) {
 	$queryLancamento = 'INSERT INTO `lancamento` (`lancamentoID`, `valor`, `quantidade`, `data`, `descricao`, `contaBancariaID`, `categoriaID`, `posicaoCategoriaXML`) VALUES (NULL, "'.$valor.'", "'.$quantidade.'", "'.$data.'", "'.$comentario.'", "'.$_SESSION["contaBancariaID"].'", \'1\', "'.$categoria.'");';
-	$queryInsercao = mysql_query($queryLancamento, $conexao) or die(mysql_error());
+	$queryInsercao = mysqli_query($conexao, $queryLancamento) or die(mysql_error($conexao));
 }
 
 //BUSCA DE LANCAMENTO, DEPOIS DE SETAR AS SESSIONS CABEÇA
 $lancaSQL = 'SELECT `valor`,`quantidade`,`data`,`descricao` FROM `lancamento` WHERE `contaBancariaID`="'.$_SESSION['contaBancariaID'].'"';
-$lancaQuery = mysql_query($lancaSQL, $conexao) or die(mysql_error());
-$lancaArray = mysql_fetch_assoc($lancaQuery);
+$lancaQuery = mysqli_query($conexao, $lancaSQL) or die(mysql_error($conexao));
+$lancaArray = mysqli_fetch_assoc($lancaQuery);
+#var_dump($lancaQuery);die;
+$somaValores=0;
+if($lancaArray) {
+	while ($row=mysqli_fetch_assoc($lancaQuery)) {
+	#foreach ($lancaArray as $row) {
+	#while ($row = $lancaQuery->fetch_object()){
+		#var_dump($row);die;
+		#echo $row['valor']*$row['quantidade']."-";
+		$somaValores+=$row['valor']*$row['quantidade'];
+	}
+	#die;
+} /*else {
+	$somaValores=0;
+}*/
 
-$somaValores;
-while ($row=mysql_fetch_assoc($lancaQuery)) {
-	//echo $row['valor']*$row['quantidade']."-";
-	$somaValores+=$row['valor']*$row['quantidade'];
-}
 //echo $somaValores;
+/*<center>
+					<embed src="abertura.swf" width="780px" height="200px" style="margin:0 auto;">
+					</center>*/
 ?>
+<center>
+	
+</center>
 <!--TABELA QUE SOMENTE POSICIONA NO CENTRO A TABELA CENTRAL -->
 <table width="100%" height="100%" cellpadding="0" cellspacing="0">
-	<tr valign="top">
+		
 		<!-- CELULA LATERAL ESQUERDA -->
+		<tr valign="top">
 		<td>
 			<table class="barraLateralEsquerda">
 				<tr>
@@ -164,7 +184,11 @@ while ($row=mysql_fetch_assoc($lancaQuery)) {
 			
 			<!--TABELA CENTRAL, A MAIS PRINCIPAL DE TODAS -->
 			<table width="780" cellpadding="0" cellspacing="0">
-				
+				<tr>
+					<td>
+					<embed src="abertura.swf" width="780px" height="200px" style="margin:0 auto;">
+					</td>
+				</tr>
 				<!-- LINHA DE CIMA, DE BOAS VINDAS -->
 				<tr>
 					<td background="imagens/fundoDegrade.jpg">
@@ -178,7 +202,8 @@ while ($row=mysql_fetch_assoc($lancaQuery)) {
 								Bem vindo, <?php echo $_SESSION['nome']?>.
 								</td>
 								<td>
-								<a href="http://localhost/cashflower">sair</a>
+
+								<a href="<?php echo dirname($_SERVER['REQUEST_URI']); ?>/">sair</a>
 								</td>
 							</tr>
 						</table>
@@ -199,11 +224,11 @@ while ($row=mysql_fetch_assoc($lancaQuery)) {
 									<select name="contaBancariaID" onchange="carregarConta();">
 									<?php
 									$buscaReferenciasSQL = 'SELECT `userID`,`contaBancariaID` FROM `relusercont` WHERE  `userID` = "'.$_SESSION['userID'].'";';
-									$buscaReferenciasQuery = mysql_query($buscaReferenciasSQL, $conexao) or die(mysql_error());
-									while ($row = mysql_fetch_assoc($buscaReferenciasQuery)) {
+									$buscaReferenciasQuery = mysqli_query($conexao, $buscaReferenciasSQL) or die(mysql_error($conexao));
+									while ($row = mysqli_fetch_assoc($buscaReferenciasQuery)) {
 										$buscaContasSQL = 'SELECT `contaBancariaID`,`contaNome` FROM `contabancaria` WHERE `contaBancariaID` = "'.$row['contaBancariaID'].'";';
-										$buscaContasQuery = mysql_query($buscaContasSQL, $conexao) or die(mysql_error());
-										$buscaArray = mysql_fetch_assoc($buscaContasQuery);
+										$buscaContasQuery = mysqli_query($conexao, $buscaContasSQL) or die(mysql_error($conexao));
+										$buscaArray = mysqli_fetch_assoc($buscaContasQuery);
 										
 										//Se a conta foi a que foi selecionada deve estar marcada
 										if($contaArray["contaBancariaID"]==$buscaArray["contaBancariaID"])
@@ -242,7 +267,9 @@ while ($row=mysql_fetch_assoc($lancaQuery)) {
 									<a href="excluirConta.php">Excluir essa conta</a>
 								</td>
 								<!-- GRAFICO -->
+								
 								<td>
+								<?php /*
 								<script type="text/javascript">
 AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0','width','550','height','280','title','Grafico, baixe o flash player','src','grafico','quality','high','pluginspage','http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash','movie','grafico' ); //end AC code
 </script><noscript><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="550" height="280" title="Grafico, baixe o flash player">
@@ -250,7 +277,8 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
 									<param name="quality" value="high" />
 									<param name="wmode" value="transparent" />
 									<embed src="grafico.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="550" height="280"></embed>
-								</object></noscript>								
+								</object></noscript>	*/ ?>
+								<embed src="grafico.swf" width="550px" height="280px">							
 								</td>
 							</tr>
 						</table>
@@ -333,7 +361,8 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
 		</td>
 		<!-- CELULA CENTRAL, DO RODAPE -->
 		<td class="tdRodape">
-			Desenvolvido por Francisco Matelli - www.franciscomatelli.com
+			<p>Desenvolvido por Francisco Matelli - <a href="https://www.franciscomat.com">www.franciscomat.com</a></p>
+
 		</td>
 		<!-- CELULA LATERAL DIREITA continuação -->
 		<td>
@@ -345,6 +374,6 @@ AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/
 		</td>
 	</tr>
 </table>
-
+<p><center><small>2018 review - grafico.swf was replaced by an sample, need maintence</small></center></p>
 </body>
 </html>
